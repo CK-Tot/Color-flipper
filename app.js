@@ -11,7 +11,7 @@ const copyBtn = $('copy-btn');
 const historyEl = $('history');
 
 const simpleColors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'pink', 'brown'];
-let colorHistory = [];
+let colorHistory = JSON.parse(localStorage.getItem('colorHistory')) || [];
 
 function getRandomSimpleColor() 
 {
@@ -53,6 +53,8 @@ function changeColor(color)
     }
 
     updateHistory();
+    localStorage.setItem('colorHistory', JSON.stringify(colorHistory));
+
 }
 
 
@@ -83,6 +85,7 @@ function updateHistory ()
         historyItem.appendChild(timeText);
         historyEl.appendChild(historyItem);
     });
+
 }
 
 function copyToClipboard() 
@@ -112,6 +115,8 @@ hexBtn.addEventListener('click', () => {
 copyBtn.addEventListener('click', copyToClipboard);
 
 // changeColor(getRandomHexColor)
+
+updateHistory();
 
 
 
